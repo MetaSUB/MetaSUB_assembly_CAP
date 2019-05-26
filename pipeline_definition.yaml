@@ -1,0 +1,90 @@
+---
+NAME: metasub_assembly_cap
+VERSION: 0.1
+SNAKEMAKE:
+  DIR: snakemake_files
+  CONF: pipeline_config.py
+REQUIREMENTS: {}
+SAMPLE_TYPES: []
+PACKAGE_MEGA:
+  RECIPE_DIR: recipes
+
+ORIGINS:
+- - raw_short_read_dna
+
+FILE_TYPES:
+- name: gz_fastq
+  ext: fastq.gz
+- name: minsketch
+  ext: msh
+- fastqc
+- bam
+- sam
+- txt
+- m8
+- name: gz_m8
+  ext: m8.gz
+- name: mpa
+  ext: mpa.tsv
+- fasta
+- fastg
+- vcf
+- tsv
+- csv
+- name: gz_tsv
+  ext: tsv.gz
+- json
+- name: jellyfish
+  ext: jf
+
+
+RESULT_TYPES:
+- NAME: raw_short_read_dna
+  FILES:
+    read1: gz_fastq
+    read2: gz_fastq
+
+- NAME: megahit_assembly
+  DEPENDENCIES:
+  - raw_short_read_dna
+  FILES:
+    contigs: fasta
+
+- NAME: concat_contigs
+  LEVEL: group
+  DEPENDENCIES:
+  - megahit_assembly
+  FILES:
+    contigs: fasta
+
+- NAME: self_align
+  LEVEL: group
+  DEPENDENCIES:
+  - concat_contigs
+  FILES:
+    alignment: m8
+
+- NAME: find_homologous_contigs
+  LEVEL: group
+  DEPENDENCIES:
+  - self_align
+  FILES:
+    strain_groups: csv
+    strain_contigs: fasta
+    homology_groups: csv
+    homology_contigs: fasta
+    
+- NAME: align_to_nt
+  LEVEL: group
+  DEPENDENCIES:
+  - find_homologous_contigs
+  FILES:
+    alignment: m8
+
+- NAME: group_assignments
+  LEVEL: group
+  DEPENDENCIES:
+  - align_to_nt
+  FILES:
+    taxa_ids: csv
+
