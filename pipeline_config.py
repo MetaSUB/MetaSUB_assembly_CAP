@@ -23,6 +23,9 @@ config = {
             'filepath': which('megahit'),
         }
     },
+    'concat_contigs': {
+        'min_length': 10 * 1000,
+    },
     'self_align': {
         'threads': 16,
         'time': 10,
