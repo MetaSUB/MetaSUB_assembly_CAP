@@ -2,7 +2,7 @@
 
 rule find_strain_homologous_contigs:
     input:
-        contigs = config['megahit_assembly']['contigs'],
+        contigs = config['concat_contigs']['contigs'],
         alignment = config['self_align']['alignment'],
     output:
         contigs = config['find_homologous_contigs']['strain_contigs'],
@@ -28,7 +28,7 @@ rule find_strain_homologous_contigs:
 
 rule find_homologous_contigs:
     input:
-        contigs = config['megahit_assembly']['contigs'],
+        contigs = config['concat_contigs']['contigs'],
         alignment = config['self_align']['alignment'],
     output:
         contigs = config['find_homologous_contigs']['homology_contigs'],

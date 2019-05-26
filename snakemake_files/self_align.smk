@@ -2,9 +2,9 @@
 
 rule make_self_blastdb:
     input:
-        contigs = config['megahit_assembly']['contigs'],
+        contigs = config['concat_contigs']['contigs'],
     output:
-        blastdb = temp(config['group_name'] + 'self_align.blast_db'),
+        blastdb = '{group_name}.self_align.blast_db',
     params:
         exc = config['blastn']['makedb']['filepath'],
     threads: int(config['self_align']['threads'])
@@ -23,8 +23,8 @@ rule make_self_blastdb:
 
 rule self_align:
     input:
-        contigs = config['megahit_assembly']['contigs'],
-        blastdb = config['group_name'] + 'self_align.blast_db',
+        contigs = config['concat_contigs']['contigs'],
+        blastdb = '{group_name}.self_align.blast_db',
     output:
         alignment = config['self_align']['alignment']
     params:

@@ -1,5 +1,6 @@
 from moduleultra.pipeline_config_utils import *
 from sys import stderr
+from os import getenv
 
 PIPE_DIR = fromPipelineDir('')
 
@@ -38,5 +39,10 @@ config = {
         'threads': 16,
         'time': 10,
         'mem': 20,
+    },
+    'blastn': {
+        'makedb': {'filepath': which('makeblastdb')},
+        'exc': {'filepath': which('blastn')},
+        'nt': {'filepath': getenv('BLAST_NT_DB')}, 
     },
 }

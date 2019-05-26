@@ -1,6 +1,6 @@
 
 
-rule assemble_reads_with_megahit:
+rule concat_contigs:
     input:
         contigs = expandGroup(config['megahit_assembly']['contigs']),
     output:

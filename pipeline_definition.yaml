@@ -51,21 +51,21 @@ RESULT_TYPES:
     contigs: fasta
 
 - NAME: concat_contigs
-  LEVEL: group
+  LEVEL: GROUP
   DEPENDENCIES:
   - megahit_assembly
   FILES:
     contigs: fasta
 
 - NAME: self_align
-  LEVEL: group
+  LEVEL: GROUP
   DEPENDENCIES:
   - concat_contigs
   FILES:
     alignment: m8
 
 - NAME: find_homologous_contigs
-  LEVEL: group
+  LEVEL: GROUP
   DEPENDENCIES:
   - self_align
   FILES:
@@ -75,14 +75,14 @@ RESULT_TYPES:
     homology_contigs: fasta
     
 - NAME: align_to_nt
-  LEVEL: group
+  LEVEL: GROUP
   DEPENDENCIES:
   - find_homologous_contigs
   FILES:
     alignment: m8
 
 - NAME: group_assignments
-  LEVEL: group
+  LEVEL: GROUP
   DEPENDENCIES:
   - align_to_nt
   FILES:
