@@ -45,4 +45,7 @@ config = {
         'exc': {'filepath': which('blastn')},
         'nt': {'filepath': getenv('BLAST_NT_DB')}, 
     },
+    'group_assignments': {
+        'taxa_map': getenv('NCBI_TAXA_MAP'),
+    },
 }

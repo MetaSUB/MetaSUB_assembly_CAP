@@ -8,11 +8,12 @@ rule group_taxonomic_assignments:
         taxa_ids = config['group_assignments']['taxa_ids'],
     params:
         exc = config['gimmebio']['exc']['filepath'],
+        taxa_map = config['group_assignments']['taxa_map']
     run:
         cmd = (
             '{params.exc} '
             'assembly id-contigs '
-            '--winner-takes-all '
+            '-g {params.taxa_map} '
             '-f {input.contigs} '
             '{input.alignment} '
             '{output.taxa_ids} '

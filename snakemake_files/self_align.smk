@@ -16,7 +16,8 @@ rule make_self_blastdb:
             '{params.exc} '
             '-dbtype nucl '
             '-in {input.contigs} '
-            '-out {output.blastdb} '
+            '-out {output.blastdb} && '
+            'touch {output.blastdb}'
         )
         shell(cmd)
 
